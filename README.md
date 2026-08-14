@@ -1,6 +1,6 @@
 # DSA3050 - Public Procurement (PPRA Kenya) Project
 
-Dataset: Kenya — Public Procurement Regulatory Authority (PPRA)
+Dataset: Kenya: Public Procurement Regulatory Authority (PPRA)
 Source: https://data.open-contracting.org/en/publication/147#access
 
 ## Project overview
