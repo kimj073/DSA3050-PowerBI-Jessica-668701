@@ -91,6 +91,6 @@ These questions will produce both descriptive insights and diagnostic metrics us
 
 ---
 
-Author: Austin Owuor Odera
+Author: Jessica Kimani
 Course: DSA3050 - Business Intelligence & Data Visualization
 Date: 2026-08
