@@ -143,9 +143,10 @@ Below are the main Power Query transformations applied while preparing the datas
 
 ![Disabling load for modelling](screenshots/c_diabling%20load%20for%20modelling.png)
 
+## Data modelling: fact table, dimensions, relationships and decisions
+
 ![Model view example](screenshots/c_model.png)
 
-## Data modelling: fact table, dimensions, relationships and decisions (simple English)
 Below I explain, in plain language, why I picked the fact table, why I made each dimension table, how the tables are connected, and some modelling choices I made. The Power BI model screenshot (above) shows these tables and relationships.
 
 1) Why I selected the fact table
