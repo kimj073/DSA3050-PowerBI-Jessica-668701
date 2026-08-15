@@ -52,40 +52,6 @@ I plan to investigate all seven questions above, prioritised as follows:
 
 These questions will produce both descriptive insights and diagnostic metrics useful for procurement oversight.
 
-## Proposed methodology
-1. Data ingestion & schema mapping
-   - Download the PPRA / Open Contracting data (JSON or CSV) and map fields to the canonical schema.
-2. Data cleaning
-   - Normalize currencies (if multiple currencies appear) or convert to a single base currency if feasible.
-   - Parse and standardise dates (award_date, contract_start/end, publication_date).
-   - Deduplicate tenders/awards and flatten nested award/party objects into relational tables: tenders, awards, parties, contracts.
-3. ETL and feature engineering
-   - Compute derived fields: award_value_numeric, award_year, duration_days (award to contract signature or publication to award), supplier_id, procuring_entity_id.
-4. Analysis and visualisations
-   - Q1: Time series plots (count of tenders per period; total award value per period; CAGR or year-over-year % change).
-   - Q2: Bar charts / treemap of top procuring entities and top categories by award value and counts.
-   - Q3: Tables and charts of top suppliers by number and value of awards.
-   - Q4: Concentration metrics (top-N share, Herfindahl–Hirschman Index, Lorenz curve and Gini coefficient for award value distribution).
-   - Q5: Frequency and award-value distribution by procurement method (histogram, boxplots, stacked bars).
-   - Q6: Processing durations: compute durations and show entities with longest median/mean durations and distribution plots.
-   - Q7: Data quality dashboard: percent missing for key fields, missing parties, missing award/contract links and guideline notes.
-5. Tools
-   - Power BI for dashboarding and interactive visuals (primary deliverable).
-   - Python (pandas) or SQL for data cleaning, aggregation and metrics.
-   - Jupyter/Markdown or notebook for reproducible steps and code snippets.
-
-## Deliverables
-- Cleaned dataset files (CSV/Parquet) and ETL notes
-- Power BI report with interactive dashboards answering the research questions
-- A short analytical report (PDF/Markdown) summarising methods, findings and recommendations
-- README (this file) documenting approach and replication steps
-
-## Next steps (short-term plan)
-1. Obtain and inspect the PPRA dataset from the given link.
-2. Map actual field names and sample rows; create a small exploratory notebook to confirm types and missingness.
-3. Implement ETL scripts to flatten awards/parties into tables.
-4. Begin Power BI report with core charts: time series and top entities/suppliers.
-
 ## Power Query transformations (Power BI / Power Query Editor)
 Below are the main Power Query transformations applied while preparing the dataset for analysis. Each entry lists the Problem observed in the raw data, the Transformation applied in Power Query, the Reason for the change, and the Result achieved. Screenshots showing the Power Query steps are included where relevant (files in screenshots/).
 
@@ -176,7 +142,41 @@ Below are the main Power Query transformations applied while preparing the datas
 - Result: A compact model with only analytical tables loaded and properly defined relationships.
 
 ![Disabling load for modelling](screenshots/c_diabling%20load%20for%20modelling.png)
-![Model view example](screenshots/c_model.png)
+
+## Proposed methodology
+1. Data ingestion & schema mapping
+   - Download the PPRA / Open Contracting data (JSON or CSV) and map fields to the canonical schema.
+2. Data cleaning
+   - Normalize currencies (if multiple currencies appear) or convert to a single base currency if feasible.
+   - Parse and standardise dates (award_date, contract_start/end, publication_date).
+   - Deduplicate tenders/awards and flatten nested award/party objects into relational tables: tenders, awards, parties, contracts.
+3. ETL and feature engineering
+   - Compute derived fields: award_value_numeric, award_year, duration_days (award to contract signature or publication to award), supplier_id, procuring_entity_id.
+4. Analysis and visualisations
+   - Q1: Time series plots (count of tenders per period; total award value per period; CAGR or year-over-year % change).
+   - Q2: Bar charts / treemap of top procuring entities and top categories by award value and counts.
+   - Q3: Tables and charts of top suppliers by number and value of awards.
+   - Q4: Concentration metrics (top-N share, Herfindahl–Hirschman Index, Lorenz curve and Gini coefficient for award value distribution).
+   - Q5: Frequency and award-value distribution by procurement method (histogram, boxplots, stacked bars).
+   - Q6: Processing durations: compute durations and show entities with longest median/mean durations and distribution plots.
+   - Q7: Data quality dashboard: percent missing for key fields, missing parties, missing award/contract links and guideline notes.
+5. Tools
+   - Power BI for dashboarding and interactive visuals (primary deliverable).
+   - Python (pandas) or SQL for data cleaning, aggregation and metrics.
+   - Jupyter/Markdown or notebook for reproducible steps and code snippets.
+
+## Deliverables
+- Cleaned dataset files (CSV/Parquet) and ETL notes
+- Power BI report with interactive dashboards answering the research questions
+- A short analytical report (PDF/Markdown) summarising methods, findings and recommendations
+- README (this file) documenting approach and replication steps
+
+## Next steps (short-term plan)
+1. Obtain and inspect the PPRA dataset from the given link.
+2. Map actual field names and sample rows; create a small exploratory notebook to confirm types and missingness.
+3. Implement ETL scripts to flatten awards/parties into tables.
+4. Begin Power BI report with core charts: time series and top entities/suppliers.
+
 
 ## Notes on reproducibility and screenshots
 - The screenshots live in the screenshots/ directory and show the Power Query steps and diagnostics referenced above. If you want additional step-by-step images (for each Transform step's exact menu clicks), I can add more focused screenshots or short annotated images.
