@@ -143,43 +143,53 @@ Below are the main Power Query transformations applied while preparing the datas
 
 ![Disabling load for modelling](screenshots/c_diabling%20load%20for%20modelling.png)
 
-## Proposed methodology
-1. Data ingestion & schema mapping
-   - Download the PPRA / Open Contracting data (JSON or CSV) and map fields to the canonical schema.
-2. Data cleaning
-   - Normalize currencies (if multiple currencies appear) or convert to a single base currency if feasible.
-   - Parse and standardise dates (award_date, contract_start/end, publication_date).
-   - Deduplicate tenders/awards and flatten nested award/party objects into relational tables: tenders, awards, parties, contracts.
-3. ETL and feature engineering
-   - Compute derived fields: award_value_numeric, award_year, duration_days (award to contract signature or publication to award), supplier_id, procuring_entity_id.
-4. Analysis and visualisations
-   - Q1: Time series plots (count of tenders per period; total award value per period; CAGR or year-over-year % change).
-   - Q2: Bar charts / treemap of top procuring entities and top categories by award value and counts.
-   - Q3: Tables and charts of top suppliers by number and value of awards.
-   - Q4: Concentration metrics (top-N share, Herfindahl–Hirschman Index, Lorenz curve and Gini coefficient for award value distribution).
-   - Q5: Frequency and award-value distribution by procurement method (histogram, boxplots, stacked bars).
-   - Q6: Processing durations: compute durations and show entities with longest median/mean durations and distribution plots.
-   - Q7: Data quality dashboard: percent missing for key fields, missing parties, missing award/contract links and guideline notes.
-5. Tools
-   - Power BI for dashboarding and interactive visuals (primary deliverable).
-   - Python (pandas) or SQL for data cleaning, aggregation and metrics.
-   - Jupyter/Markdown or notebook for reproducible steps and code snippets.
+![Model view example](screenshots/c_model.png)
 
-## Deliverables
-- Cleaned dataset files (CSV/Parquet) and ETL notes
-- Power BI report with interactive dashboards answering the research questions
-- A short analytical report (PDF/Markdown) summarising methods, findings and recommendations
-- README (this file) documenting approach and replication steps
+## Data modelling: fact table, dimensions, relationships and decisions (simple English)
+Below I explain, in plain language, why I picked the fact table, why I made each dimension table, how the tables are connected, and some modelling choices I made. The Power BI model screenshot (above) shows these tables and relationships.
 
-## Next steps (short-term plan)
-1. Obtain and inspect the PPRA dataset from the given link.
-2. Map actual field names and sample rows; create a small exploratory notebook to confirm types and missingness.
-3. Implement ETL scripts to flatten awards/parties into tables.
-4. Begin Power BI report with core charts: time series and top entities/suppliers.
+1) Why I selected the fact table
+- Fact table chosen: Awards (one row per award)
+- Why: The main numeric measure we want to analyse is award value (money paid). Awards are the records that carry that measure and the event dates (award_date). Using Awards as the fact table makes it easy to aggregate total value, counts of awards, and time-series of money spent. In many tenders there can be multiple awards or split lots, so awards are the granular transaction unit.
 
+2) Why each dimension was created (short reasons)
+- Time (Date) dimension: To group and filter by year, month, quarter and day. It simplifies time-series charts and performance of date filters.
+- Tender dimension: Holds tender-level attributes (tender_id, title, procurement_method, procurement_category). A tender may have multiple awards, so tender attributes describe the context for each award.
+- Procuring Entity (Buyer) dimension: Contains buyer_id, buyer_name, and attributes about the government agency. This lets us analyse spend by buyer without duplicating buyer text across every award row.
+- Supplier dimension: Contains supplier_id, supplier_name, and cleaned supplier attributes. This lets us count awards per supplier and analyse supplier concentration without repeating long names in the fact table.
+- Contract dimension (optional): Holds contract_start, contract_end and contract_id when a contract is separate from the award. Useful for contract-duration analysis and linking awards to contracts.
+- Procurement Method / Category dimensions: If there are many categories or methods, these dims standardise names and allow easy grouping and colour coding in visuals.
 
-## Notes on reproducibility and screenshots
-- The screenshots live in the screenshots/ directory and show the Power Query steps and diagnostics referenced above. If you want additional step-by-step images (for each Transform step's exact menu clicks), I can add more focused screenshots or short annotated images.
+3) The relationships used
+- Awards (Fact) → Tender (Dimension): Many-to-One relationship using tender_id on Awards to tender_id on Tender. Each award belongs to one tender, a tender can have many awards.
+- Awards (Fact) → Supplier (Dimension): Many-to-One relationship using supplier_id on Awards to supplier_id on Supplier. Each award is given to one supplier (or the supplier side is represented), while a supplier can have many awards.
+- Awards (Fact) → ProcuringEntity (Dimension): Many-to-One using procuring_entity_id on Awards to buyer_id on ProcuringEntity. A buyer issues many awards.
+- Awards (Fact) → Time (Date) Dimension: Many-to-One using award_date (or award_date_key) to Date dimension key. Many awards can happen on the same date.
+- Awards (Fact) → Contract (Dimension): Many-to-One using contract_id when present.
+
+4) Cardinality decisions (simple)
+- Fact-to-dimension cardinality is mostly Many (in fact) → One (in dimension). That means one row in the dimension corresponds to many rows in the fact table. Examples:
+  - Many Awards → One Supplier
+  - Many Awards → One Tender (if multiple awards per tender)
+  - Many Awards → One Procuring Entity
+- I ensured dimension keys are unique (one row per supplier, one row per tender) by deduplicating when building the dimension queries.
+
+5) Filter direction decisions (simple)
+- Default filter direction: single-direction filters from Dimensions → Fact. That means when you filter a Supplier, it filters Awards, not the other way around. This is the usual, safe setup and avoids ambiguous filters.
+- When to use bi-directional: only when two dimension tables both need to filter each other through the fact (rare), or when modelling many-to-many relationships where a bridge table is used. In this project I kept relationships single-direction to keep behaviour predictable and to reduce the chance of circular filter paths.
+
+6) Modelling challenges encountered (and what I did)
+- Multiple awards per tender: Some tenders have more than one award (lots). I chose Awards as the fact table and kept Tender as a dimension to represent the tender-level context. This keeps granularity correct.
+- Missing or inconsistent IDs: supplier_id or parties_id were sometimes missing or malformed. I cleaned these in Power Query (try/otherwise, replace errors) and used deduplicated supplier dimension rows. For missing supplier IDs I used supplier name matching and kept a fallback "Unknown Supplier" key for safe joins.
+- Duplicate supplier names and name variants: Suppliers appeared with small name differences. I standardised names where sensible and used supplier_id when available. If no stable id existed, I applied simple name cleaning (trim, uppercase) and documented the limitation.
+- Nested/complex JSON fields and errors: Some fields were nested objects or arrays and caused errors when expanded. I handled these with safe M code (try/otherwise) and created staging queries with Reference/Duplicate so I could experiment without breaking the main query.
+- Currency and award_value: The dataset used KES only, but if multiple currencies existed I would normalise to a single base currency. I ensured value_amount was numeric and created a cleaned award_value_numeric for measures.
+- Performance & model size: The raw dataset is large. I disabled load on staging queries and only loaded final dimensions and the Awards fact. That reduces memory and speeds up refresh.
+- Ambiguous relationships: At first I had some relationships that produced ambiguous filter paths (e.g., if a dimension joined to two different facts). I resolved this by keeping a single fact table for monetary measures and using bridge tables if needed for many-to-many relationships.
+
+If you want, I can also:
+- Add the exact keys used in the model (column names) as a short table in the README.
+- Show a small diagram or annotated screenshot of the model with arrows and labels.
 
 ---
 
