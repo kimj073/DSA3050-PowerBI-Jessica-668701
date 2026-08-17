@@ -303,6 +303,82 @@ RETURN
 - **Filter context impact:** `CALCULATE` modifies the existing filter context by evaluating the `NOT (Awards[id] IN ...)` predicate alongside any external dashboard slicers.
 - **Where it is used in dashboard:** Audit overview dashboards, risk exposure visuals, and high-level compliance summary pages.
 
+## Dashboard Pages — Insights & Analysis
+
+### 1. Executive Summary Dashboard
+
+The Executive Summary Dashboard provides a high-level overview of the entire Kenyan public procurement system. It synthesizes total procurement processes, total awards, aggregate financial value, and total active suppliers. It captures market scale, value distribution across award tiers, primary buyer behaviour, and multi-year trajectory trends (2018–2026).
+
+![Executive Summary Dashboard](screenshots/Executive%20Summary%20Dashboard.png)
+
+#### Questions & Insight Answers
+
+**Q1: How have the number and value of public procurement processes changed over time?**
+
+Total procurement processes reached **259K**, with **109K total awards** amounting to a combined value of **1.68 Trillion (1.68T)** across **64K suppliers**. The volume of procurement processes peaked significantly in **2023–2024** (reaching ~60K processes per year), whereas the monetary award value peaked in **2022** and **2024** due to concentrated high-value strategic awards before tapering off toward 2026.
+
+**Q2: Which procuring entities account for the highest total award values?**
+
+Infrastructure authorities lead spending. The top procuring entities (buyers) by award value are led by **Kenya Urban Roads Authority** (~320bn+), followed by **Kenya National Highway Authority** (~180bn), **Uasin Gishu County Government** (~150bn), **Teachers Service Commission** (~95bn), and **Kenya Medical Supplies Authority** (~75bn).
+
+**Q5: Which procurement methods are most frequently used, and how do their award values compare?**
+
+**Open Tendering** is the predominant method by both value and count, taking up the overwhelming share of total spent funds (over 85%). **Direct** and **Selective** procurement methods account for a smaller proportion of overall processes but hold substantial monetary share relative to their smaller volume.
+
+**Q-Extra: How is total award value distributed across scale tiers?**
+
+Spend is heavily skewed towards upper-value tiers. **Ultra-High** and **Medium-Scale** tiers account for the largest share of total financial volume despite making up a tiny percentage of overall award count, whereas **Small-Scale** and **Micro-Value** awards make up the vast majority of award counts but a tiny fraction of total value.
+
+---
+
+### 2. Supplier Analysis Dashboard
+
+**Brief Explanation:**
+The Supplier Analysis Dashboard evaluates supplier concentration, total financial allocation, and vendor performance across 6 distinct award-value scale tiers (Micro-value, Small-scale, Medium-scale, Large-scale, Ultra-High, and Mega/Strategic). It differentiates high-volume operational vendors from high-value infrastructure suppliers.
+
+#### Questions & Insight Answers
+
+**Q3: Which suppliers receive the largest number and value of public procurement awards?**
+
+*By value:* The top vendors by award value are **CAUSEWAY ENG...** (~160bn+), **Liason Group** (~140bn+), **MINET KENYA INS...** (~90bn+), **LINZI FINCO LLP**, and **M/S CHINA CIVIL...**.
+
+*By volume/count:* The top vendors by contract count are **TOYOTA KENYA LI...** (~300 awards), **Longrock Tours &...** (~285 awards), **AFRICAN TOUCH...** (~275 awards), and **LAKE NAIVASHA...** (~160 awards).
+
+**Q4: How concentrated are procurement awards among the largest suppliers?**
+
+At the macro level, the **Top 10 Suppliers** command **501.68bn** out of **1.17T Total Supplier Award Value**, representing a **43% market share (0.43)**.
+
+*By scale tier:* In the **Ultra-High** tier, market concentration hits **94% (0.94)**, where just **15 suppliers** capture **499.41bn** out of **530.62bn**. Conversely, **Micro-Value** and **Medium-Scale** tiers exhibit low top-10 concentration shares (**6%** and **4%** respectively) across thousands of small vendors (14K–20K suppliers).
+
+**Q-Extra: How do procurement methods vary by vendor value scale?**
+
+Across all tier levels, primary procurement methods account for **84.79% to 95.3%** of total supplier award value and **80.0% to 95.1%** of total award count, with secondary/direct methods making up the remaining ~5%–15%.
+
+---
+
+### 3. Procurement Risk Dashboard
+
+**Brief Explanation:**
+The Procurement Risk Dashboard serves as an audit and compliance view. It tracks governance vulnerabilities, cycle-time bottlenecks, and contractual documentation risks, specifically focusing on processing lead times across entities/methods and tracking awards that lack signed formal contracts.
+
+#### Questions & Insight Answers
+
+**Q2 (Categories): Which procurement categories account for the highest total prior-year award values?**
+
+**Works** represents the highest award value at **91.30bn**, followed by **Services** at **67.58bn**, and **Goods** at **22.51bn**.
+
+**Q6: Which entities and methods have the longest procurement-processing durations?**
+
+Processing cycle times vary by procurement method. **Specially Permitted / Alternative Selection** methods have the longest average processing duration (exceeding **400 days**), followed by **Selective Tendering** (~200+ days). Standard **Open Tendering** and **Direct Sourcing** move faster through administrative stages (~100–150 days). Top entities with long durations include **Kenya Power** and **Kisumu County**.
+
+**Q-Extra 1: What is the risk trend regarding awards without signed contracts?**
+
+Across all procurement categories (Goods, Services, Works), there is a sharp spike in **Awards Without Signed Contract** in **2024** (reaching over 3,000–4,000 awards without signed contract documentation in that single year), identifying a major compliance gap during that period.
+
+**Q-Extra 2: Which buyers carry the highest volume of unconfirmed/unsigned contract risk?**
+
+Local county governments and regional authorities — such as **PC KINY...**, **Makueni County**, **Elgeyo-Marakwet**, **Nakuru County**, and **Nairobi County** — rank highest in awards lacking recorded signed contract dates in the system.
+
 ---
 
 Author: Jessica Kimani
