@@ -315,19 +315,21 @@ The Executive Summary Dashboard provides a high-level overview of the entire Ken
 
 **Q1: How have the number and value of public procurement processes changed over time?**
 
-Total procurement processes reached **259K**, with **109K total awards** amounting to a combined value of **1.68 Trillion (1.68T)** across **64K suppliers**. The volume of procurement processes peaked significantly in **2023–2024** (reaching ~60K processes per year), whereas the monetary award value peaked in **2022** and **2024** due to concentrated high-value strategic awards before tapering off toward 2026.
+Total procurement processes reached 259K, with 109K total awards amounting to a combined value of 1.68 Trillion (1.68T) across 64K suppliers. The volume of procurement processes peaked significantly in 2023–2024 (reaching ~60K processes per year), whereas the monetary award value peaked in 2022 and 2024 due to concentrated high-value strategic awards before tapering off toward 2026.
 
 **Q2: Which procuring entities account for the highest total award values?**
 
-Infrastructure authorities lead spending. The top procuring entities (buyers) by award value are led by **Kenya Urban Roads Authority** (~320bn+), followed by **Kenya National Highway Authority** (~180bn), **Uasin Gishu County Government** (~150bn), **Teachers Service Commission** (~95bn), and **Kenya Medical Supplies Authority** (~75bn).
+Infrastructure authorities lead spending. The top procuring entities (buyers) by award value are led by Kenya Urban Roads Authority(~320bn+), followed by Kenya National Highway Authority (~180bn), Uasin Gishu County Government (~150bn), Teachers Service Commission (~95bn), and Kenya Medical Supplies Authority (~75bn).
 
 **Q5: Which procurement methods are most frequently used, and how do their award values compare?**
 
-**Open Tendering** is the predominant method by both value and count, taking up the overwhelming share of total spent funds (over 85%). **Direct** and **Selective** procurement methods account for a smaller proportion of overall processes but hold substantial monetary share relative to their smaller volume.
+Open Tendering is the predominant method by both value and count, taking up the overwhelming share of total spent funds (over 85%). Direct and Selective procurement methods account for a smaller proportion of overall processes but hold substantial monetary share relative to their smaller volume.
+
+![frequent procurement method](screenshots/Executive%20Summary%20Dashboard%20open.png)
 
 **Q-Extra: How is total award value distributed across scale tiers?**
 
-Spend is heavily skewed towards upper-value tiers. **Ultra-High** and **Medium-Scale** tiers account for the largest share of total financial volume despite making up a tiny percentage of overall award count, whereas **Small-Scale** and **Micro-Value** awards make up the vast majority of award counts but a tiny fraction of total value.
+Spend is heavily skewed towards upper-value tiers. Ultra-High and Medium-Scale tiers account for the largest share of total financial volume despite making up a tiny percentage of overall award count, whereas Small-Scale and Micro-Value awards make up the vast majority of award counts but a tiny fraction of total value.
 
 ---
 
@@ -341,19 +343,21 @@ The Supplier Analysis Dashboard evaluates supplier concentration, total financia
 
 **Q3: Which suppliers receive the largest number and value of public procurement awards?**
 
-*By value:* The top vendors by award value are **CAUSEWAY ENG...** (~160bn+), **Liason Group** (~140bn+), **MINET KENYA INS...** (~90bn+), **LINZI FINCO LLP**, and **M/S CHINA CIVIL...**.
+*By value:* The top vendors by award value are CAUSEWAY ENGINEERING SOLUTIONS LIMITED (~160bn+), Liason Group (~140bn+), MINET KENYA INSURANCE BROKER LIMITED (~90bn+), LINZI FINCO LLP, and M/S CHINA CIVIL ENGINEERING CONSTRUCTION CORPORATION & CRCC HARBOR & CHANNEL ENGINEERING BUREAU GROUP CO.LTD
 
-*By volume/count:* The top vendors by contract count are **TOYOTA KENYA LI...** (~300 awards), **Longrock Tours &...** (~285 awards), **AFRICAN TOUCH...** (~275 awards), and **LAKE NAIVASHA...** (~160 awards).
+*By volume/count:* The top vendors by contract count are TOYOTA KENYA LIMITED (~300 awards), Longrock Tours & Travel Limited (~285 awards), AFRICAN TOUCH SAFARIS (~277 awards), and LAKE NAIVASHA RESORT (~160 awards).
 
 **Q4: How concentrated are procurement awards among the largest suppliers?**
 
-At the macro level, the **Top 10 Suppliers** command **501.68bn** out of **1.17T Total Supplier Award Value**, representing a **43% market share (0.43)**.
+At the macro level, the Top 10 Suppliers command 501.68bn out of 1.17T Total Supplier Award Value, representing a 43% market share (0.43).
 
-*By scale tier:* In the **Ultra-High** tier, market concentration hits **94% (0.94)**, where just **15 suppliers** capture **499.41bn** out of **530.62bn**. Conversely, **Micro-Value** and **Medium-Scale** tiers exhibit low top-10 concentration shares (**6%** and **4%** respectively) across thousands of small vendors (14K–20K suppliers).
+*By scale tier:* In the Ultra-High tier, market concentration hits 94% (0.94), where just 15 suppliers capture 499.41bn out of 530.62bn. Conversely, Micro-Value and Medium-Scale tiers exhibit low top-10 concentration shares (6% and 4% respectively) across thousands of small vendors (14K–20K suppliers).
+
+![procurement awards concentration 3](screenshots/Supplier%20Analysis%20Dashboard%20Ultra-high.png)
 
 **Q-Extra: How do procurement methods vary by vendor value scale?**
 
-Across all tier levels, primary procurement methods account for **84.79% to 95.3%** of total supplier award value and **80.0% to 95.1%** of total award count, with secondary/direct methods making up the remaining ~5%–15%.
+Across all tier levels, primary procurement methods account for 84.79% to 95.3% of total supplier award value and 80.0% to 95.1% of total award count, with secondary/direct methods making up the remaining ~5%–15%.
 
 ---
 
@@ -367,19 +371,36 @@ The Procurement Risk Dashboard serves as an audit and compliance view. It tracks
 
 **Q2 (Categories): Which procurement categories account for the highest total prior-year award values?**
 
-**Works** represents the highest award value at **91.30bn**, followed by **Services** at **67.58bn**, and **Goods** at **22.51bn**.
+Works represents the highest award value at 91.30bn, followed by Services at 67.58bn, then Goods at 22.51bn.
+
+![Procurement Risk Dashboard](screenshots/Procurement%20Risk%20Dashboard%20category%20works%20Q2.png)
+![Procurement Risk Dashboard](screenshots/Procurement%20Risk%20Dashboard%20category%20services%20Q2.png)
+![Procurement Risk Dashboard](screenshots/Procurement%20Risk%20Dashboard%20category%20goods%20Q2.png)
 
 **Q6: Which entities and methods have the longest procurement-processing durations?**
 
-Processing cycle times vary by procurement method. **Specially Permitted / Alternative Selection** methods have the longest average processing duration (exceeding **400 days**), followed by **Selective Tendering** (~200+ days). Standard **Open Tendering** and **Direct Sourcing** move faster through administrative stages (~100–150 days). Top entities with long durations include **Kenya Power** and **Kisumu County**.
+Processing cycle times vary by procurement method. Specially Permitted / Alternative Selection methods have the longest average processing duration (exceeding 400 days), followed by Selective Tendering (~200+ days). Standard Open Tendering and Direct Sourcing move faster through administrative stages (~100–150 days). Top entities with long durations include Kenya Power and Kisumu County.
 
 **Q-Extra 1: What is the risk trend regarding awards without signed contracts?**
 
-Across all procurement categories (Goods, Services, Works), there is a sharp spike in **Awards Without Signed Contract** in **2024** (reaching over 3,000–4,000 awards without signed contract documentation in that single year), identifying a major compliance gap during that period.
+Across all procurement categories (Goods, Services, Works), there is a sharp spike in Awards Without Signed Contract in 2024 (reaching over 3,000–4,000 awards without signed contract documentation in that single year), identifying a major compliance gap during that period.
 
 **Q-Extra 2: Which buyers carry the highest volume of unconfirmed/unsigned contract risk?**
 
-Local county governments and regional authorities — such as **PC KINY...**, **Makueni County**, **Elgeyo-Marakwet**, **Nakuru County**, and **Nairobi County** — rank highest in awards lacking recorded signed contract dates in the system.
+Institutions of higher learning such as South Eastern Kenta University and Multimedia University of Kenya Local county governments and national authorities such as Kenya Ports Authority and Central Bank of Kenya, rank highest in awards lacking recorded signed contract dates in the system.
+
+## The "Why" Behind Each Dashboard
+
+Each dashboard is designed to answer a specific strategic question, moving the report from describing *what* happened toward explaining *why* it happened and *where* attention is needed.
+
+### 1. Executive Summary Dashboard — The "Why"
+
+The dashboard answers **why governance gaps and operational delays occur across the procurement lifecycle**, identifying compliance vulnerabilities and inefficiencies before they escalate into audit failures or financial losses.
+
+- **Why are contracts hanging in limbo?** *(Contractual Risk)* — Awards Without Signed Contract peaked sharply in 2024 across Goods, Services, and Works. Local county governments (e.g. Nakuru, Makueni, Nairobi) show the highest unconfirmed contract exposure.
+- **Why do certain procurements take so long to complete?** *(Cycle-Time Inefficiency)* — Specially Permitted and Selective Tendering methods incur delays exceeding 200–400+ days, while standard Open Tendering moves faster (~100–150 days).
+- **Why is risk distributed unevenly across category types?** *(Sectoral Risk Profiling)* — Breaking prior-year award values into Works (91.30bn), Services (67.58bn), and Goods (22.51bn) shows the highest financial exposure lies in infrastructure (Works), where long durations and unsigned contracts present the greatest fiscal risk.
+
 
 ---
 
