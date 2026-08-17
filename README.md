@@ -385,13 +385,9 @@ Institutions of higher learning such as South Eastern Kenta University and Multi
 
 ## The "Why" Behind Each Dashboard
 
-Each dashboard is designed to answer a specific strategic question, moving the report from describing *what* happened toward explaining *why* it happened and *where* attention is needed.
-
-### 1. Executive Summary Dashboard — The "Why"
-
 The dashboard answers **why governance gaps and operational delays occur across the procurement lifecycle**, identifying compliance vulnerabilities and inefficiencies before they escalate into audit failures or financial losses.
 
-- **Why are contracts hanging in limbo?** *(Contractual Risk)* — Awards Without Signed Contract peaked sharply in 2024 across Goods, Services, and Works. Local county governments (e.g. Nakuru, Makueni, Nairobi) show the highest unconfirmed contract exposure.
+- **Why are contracts hanging in limbo?** *(Contractual Risk)* — A quarterly drill through reveals that awards Without Signed Contract peaked sharply in 2024 across Goods, Services, and Works. Local county governments (e.g. Nakuru, Makueni, Nairobi) show the highest unconfirmed contract exposure.
 - **Why do certain procurements take so long to complete?** *(Cycle-Time Inefficiency)* — Specially Permitted and Selective Tendering methods incur delays exceeding 200–400+ days, while standard Open Tendering moves faster (~100–150 days).
 - **Why is risk distributed unevenly across category types?** *(Sectoral Risk Profiling)* — Breaking prior-year award values into Works (91.30bn), Services (67.58bn), and Goods (22.51bn) shows the highest financial exposure lies in infrastructure (Works), where long durations and unsigned contracts present the greatest fiscal risk.
 
