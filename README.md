@@ -188,9 +188,118 @@ Below I explain, in plain language, why I picked the fact table, why I made each
 - Performance & model size: The raw dataset is large. I disabled load on staging queries and only loaded final dimensions and the Awards fact. That reduces memory and speeds up refresh.
 - Ambiguous relationships: At first I had some relationships that produced ambiguous filter paths (e.g., if a dimension joined to two different facts). I resolved this by keeping a single fact table for monetary measures and using bridge tables if needed for many-to-many relationships.
 
-If you want, I can also:
-- Add the exact keys used in the model (column names) as a short table in the README.
-- Show a small diagram or annotated screenshot of the model with arrows and labels.
+## DAX Measures — Detailed Documentation
+
+The six most critical DAX measures selected represent a balance of core aggregation KPIs, iterative calculations, context-modification ranking, and advanced relational set logic for procurement compliance auditing.
+
+### 1. Total Award Value
+
+**Formula:**
+![Total Award Value](screenshots/d_DAX1.png)
+
+- **What it calculates:** Calculates the grand total monetary value of all procurement awards in the dataset.
+- **Why it is useful:** Serves as the primary core financial metric (headline KPI card) for overall procurement spend analysis.
+- **Main DAX functions used:** `SUM`
+- **Filter context impact:** Dynamically recalculates based on selected date ranges, procurement methods, or supplier slicers in the dashboard.
+- **Where it is used in dashboard:** Main KPI summary cards and cross-filtering visual headers across spend overview report pages.
+
+### 2. Average Processing Days
+
+**Formula:**
+```dax
+Average Processing Days = 
+AVERAGEX(
+    Procurement, 
+    DATEDIFF(Procurement[tender_Period_startDate], Procurement[tender_Period_endDate], DAY)
+)
+```
+
+- **What it calculates:** Evaluates the length of time (in days) between the start and end dates of a tender period for each row in the `Procurement` table, then averages those durations across all in-scope records.
+- **Why it is useful:** Measures operational efficiency and procurement cycle speed to highlight bottlenecks or slow tender periods.
+- **Main DAX functions used:** `AVERAGEX`, `DATEDIFF`
+- **Filter context impact:** Filters applied by department, tender type, or fiscal year modify the table passed into `AVERAGEX`, altering the calculated mean duration.
+- **Where it is used in dashboard:** Operational efficiency views, performance gauges, or tender period analysis charts.
+
+### 3. Top Supplier Rank
+
+**Formula:**
+```dax
+Top Supplier Rank = 
+RANKX(ALL(Suppliers[name]), CALCULATE(SUM(Awards[value_amount])))
+```
+
+- **What it calculates:** Ranks each supplier based on their total award value compared to every supplier in the dataset.
+- **Why it is useful:** Enables dynamic leaderboard visuals and allows stakeholders to quickly identify top vendors by awarded contract volume.
+- **Main DAX functions used:** `RANKX`, `ALL`, `CALCULATE`, `SUM`
+- **Filter context impact:** The `ALL(Suppliers[name])` modifier removes active filters on supplier names, ensuring the total pool of suppliers is ranked properly even when viewing individual visual rows.
+- **Where it is used in dashboard:** Supplier leaderboards, vendor ranking tables, and Top-N supplier analysis visuals.
+
+### 4. Supplier Award Value
+
+**Formula:**
+```dax
+Supplier Award Value = SUMX(Suppliers, RELATED(Awards[value_amount]))
+```
+
+- **What it calculates:** Iterates over the `Suppliers` table row by row, retrieves the corresponding `value_amount` from the related `Awards` table, and sums those values.
+- **Why it is useful:** Calculates financial attribution per supplier across active model relationships without requiring explicit cross-table column additions.
+- **Main DAX functions used:** `SUMX`, `RELATED`
+- **Filter context impact:** Respects filters applied to the `Suppliers` table or related dimension filters (e.g., region or category slicers).
+- **Where it is used in dashboard:** Vendor concentration charts, supplier detail matrices, and spend distribution visuals.
+
+### 5. Awards Without Signed Contract
+
+**Formula:**
+```dax
+Awards Without Signed Contract = 
+VAR AwardsWithSignedContract = 
+    CALCULATETABLE(
+        VALUES(Contacts[award_id]),
+        Contacts[dateSigned] <> BLANK()
+    )
+RETURN
+    COUNTROWS(
+        EXCEPT(
+            CALCULATETABLE(
+                VALUES(Awards[id]),
+                Awards[value_amount] <> BLANK()
+            ),
+            AwardsWithSignedContract
+        )
+    )
+```
+
+- **What it calculates:** Counts the number of valid award records that lack a signed contract date in the related `Contacts` table using set difference logic.
+- **Why it is useful:** Critical risk management metric to identify compliance gaps, pending documentation, or unconfirmed awards.
+- **Main DAX functions used:** `VAR`, `CALCULATETABLE`, `VALUES`, `COUNTROWS`, `EXCEPT`
+- **Filter context impact:** Context filters modify both underlying table variables before the set operations execute, returning the count of un-signed awards relevant to the active context.
+- **Where it is used in dashboard:** Governance, audit compliance KPI cards, and contract tracking tables.
+
+### 6. Awards Without Signed Contract Value
+
+**Formula:**
+```dax
+Awards Without Signed Contract Value = 
+VAR AwardsWithSignedContract = 
+    CALCULATETABLE(
+        VALUES(Contacts[award_id]),
+        Contacts[dateSigned] <> BLANK()
+    )
+RETURN
+    CALCULATE(
+        SUM(Awards[value_amount]),
+        Awards[value_amount] <> BLANK(),
+        NOT (
+            Awards[id] IN AwardsWithSignedContract
+        )
+    )
+```
+
+- **What it calculates:** Sums the total monetary value associated with procurement awards that do not have a recorded contract signature date.
+- **Why it is useful:** Quantifies the financial exposure and monetary risk attached to unfinalized or pending procurement contracts.
+- **Main DAX functions used:** `VAR`, `CALCULATETABLE`, `VALUES`, `CALCULATE`, `SUM`, `NOT`, `IN`
+- **Filter context impact:** `CALCULATE` modifies the existing filter context by evaluating the `NOT (Awards[id] IN ...)` predicate alongside any external dashboard slicers.
+- **Where it is used in dashboard:** Audit overview dashboards, risk exposure visuals, and high-level compliance summary pages.
 
 ---
 
