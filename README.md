@@ -195,7 +195,9 @@ The six most critical DAX measures selected represent a balance of core aggregat
 ### 1. Total Award Value
 
 **Formula:**
-![Total Award Value](screenshots/d_DAX1.png)
+```dax
+Total Award Value = SUM(Awards[value_amount])
+```
 
 - **What it calculates:** Calculates the grand total monetary value of all procurement awards in the dataset.
 - **Why it is useful:** Serves as the primary core financial metric (headline KPI card) for overall procurement spend analysis.
