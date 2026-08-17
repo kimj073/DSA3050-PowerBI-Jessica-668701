@@ -27,8 +27,6 @@ This project uses the PPRA (Kenya) procurement dataset to analyse public procure
 - bid_count / number_of_bids — how many bids received (if available)
 - lots / lot_id — lot information (if tenders are split)
 
-Note: field names may vary in the downloaded JSON/CSV. We'll map the dataset's schema to these canonical names during ETL.
-
 ## What the data represents
 Each procurement record describes a procurement process (tender) run by a procuring entity in Kenya under PPRA or related systems. Records may include multiple related objects: tender, awards, contracts and parties.
 
@@ -39,7 +37,6 @@ Each procurement record describes a procurement process (tender) run by a procur
 4. How concentrated are procurement awards among the largest suppliers?
 5. Which procurement methods are most frequently used, and how do their award values compare?
 6. Which entities have the longest procurement-processing durations?
-7. What proportion of procurement records contain missing values, missing parties or missing award and contract information?
 
 ## Which questions I intend to investigate (project scope)
 I plan to investigate all seven questions above, prioritised as follows:
@@ -48,9 +45,6 @@ I plan to investigate all seven questions above, prioritised as follows:
 - Supplier-level analysis: counts, total values and concentration (Q3 & Q4)
 - Procurement method frequency and value comparison (Q5)
 - Procurement-process durations by entity and category (Q6)
-- Data quality assessment and missingness profiling to support interpretation (Q7)
-
-These questions will produce both descriptive insights and diagnostic metrics useful for procurement oversight.
 
 ## Power Query transformations (Power BI / Power Query Editor)
 Below are the main Power Query transformations applied while preparing the dataset for analysis. Each entry lists the Problem observed in the raw data, the Transformation applied in Power Query, the Reason for the change, and the Result achieved. Screenshots showing the Power Query steps are included where relevant (files in screenshots/).
