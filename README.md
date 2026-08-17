@@ -333,8 +333,9 @@ Spend is heavily skewed towards upper-value tiers. **Ultra-High** and **Medium-S
 
 ### 2. Supplier Analysis Dashboard
 
-**Brief Explanation:**
 The Supplier Analysis Dashboard evaluates supplier concentration, total financial allocation, and vendor performance across 6 distinct award-value scale tiers (Micro-value, Small-scale, Medium-scale, Large-scale, Ultra-High, and Mega/Strategic). It differentiates high-volume operational vendors from high-value infrastructure suppliers.
+
+![Supplier Analysis Dashboard](screenshots/Supplier%20Analysis%20Dashboard.png)
 
 #### Questions & Insight Answers
 
@@ -358,8 +359,9 @@ Across all tier levels, primary procurement methods account for **84.79% to 95.3
 
 ### 3. Procurement Risk Dashboard
 
-**Brief Explanation:**
 The Procurement Risk Dashboard serves as an audit and compliance view. It tracks governance vulnerabilities, cycle-time bottlenecks, and contractual documentation risks, specifically focusing on processing lead times across entities/methods and tracking awards that lack signed formal contracts.
+
+![Procurement Risk Dashboard](screenshots/Procurement%20Risk%20Dashboard.png)
 
 #### Questions & Insight Answers
 
